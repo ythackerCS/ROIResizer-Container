@@ -1,0 +1,6 @@
+FROM python:3.7.9-buster
+RUN pip install pydicom numpy shapely dicom-contour scipy requests
+COPY ./workspace /workspace/
+WORKDIR /workspace
+RUN groupadd -g 1248610 appgroup && useradd -u 1957785 -g appgroup -m appuser
+USER appuser

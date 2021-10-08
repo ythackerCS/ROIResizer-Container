@@ -1,0 +1,150 @@
+{
+    "name": "rtstruct-resize",
+    "image": "xnat/resizeroi:latest",
+    "description": "Resizes segmentations within in a rtstruct",
+    "label": "rtstruct-resize",
+    "version": "1.0",
+    "schema-version": "1.0",
+    "type": "docker",
+    "command-line": "python scale.py #ROIFILTERNAME# #PERCENTAGE# #NEWNAME# #ALL# ",
+    "override-entrypoint": true,
+    "mounts": [
+        {
+            "name": "roi-in",
+            "writable": "false",
+            "path": "/assessor"
+        },
+        {
+            "name": "out",
+            "writable": "true",
+            "path": "/out"
+        }
+    ],
+    "environment-variables": {
+            "PROJECT": "#PROJECT#",
+            "SESSION": "#SESSION#"
+    },
+    "inputs": [
+        {
+            "name": "filterForROIName",
+            "label": null,
+            "description": "Name of the ROI to rescaled, if none provided all will be resized",
+            "type": "string",
+            "matcher": null,
+            "default-value": "",
+            "required": false,
+            "replacement-key": "#ROIFILTERNAME#",
+            "sensitive": null,
+            "command-line-flag": "-f",
+            "command-line-separator": " ",
+            "true-value": null,
+            "false-value": null,
+            "select-values": [],
+            "multiple-delimiter": null
+        },
+        {
+            "name": "percentage",
+            "label": null,
+            "description": "Percentage to scale the roi DOWN by provide float e.g. 0.2 -> scale down by 20 percent (Default 0.2)",
+            "type": "float",
+            "matcher": null,
+            "default-value": "",
+            "required": false,
+            "replacement-key": "#PERCENTAGE#",
+            "sensitive": null,
+            "command-line-flag": "-p",
+            "command-line-separator": " ",
+            "true-value": null,
+            "false-value": null,
+            "select-values": [],
+            "multiple-delimiter": null
+        },
+        {
+            "name": "newName",
+            "label": null,
+            "description": "Name of the resized ROI",
+            "type": "string",
+            "matcher": null,
+            "default-value": "",
+            "required": false,
+            "replacement-key": "#NEWNAME#",
+            "sensitive": null,
+            "command-line-flag": "-n",
+            "command-line-separator": " ",
+            "true-value": null,
+            "false-value": null,
+            "select-values": [],
+            "multiple-delimiter": null
+        },
+        {
+            "name": "all",
+            "label": null,
+            "description": "Rescale every ROI in the RTstruct? If unchecked only the largest roi will be rescaled and the rest will be deleted",
+            "type": "boolean",
+            "matcher": null,
+            "default-value": false,
+            "required": false,
+            "replacement-key": "#ALL#",
+            "sensitive": null,
+            "command-line-flag": "-a",
+            "command-line-separator": " ",
+            "true-value": "True",
+            "false-value": "False",
+            "select-values": [],
+            "multiple-delimiter": null
+        },
+        {
+            "name": "project",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "replacement-key": "#PROJECT#"
+        },
+        {
+            "name": "session",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "replacement-key": "#SESSION#"
+        }
+    ],
+    "xnat": [
+        {
+            "name": "Resizes ROI with assessor folder mounted",
+            "description": "Resizes ROI with assessor folder mounted",
+            "label": "Resizes ROI with assessor folder mounted",
+            "contexts": ["xnat:imageAssessorData"],
+            "external-inputs": [
+                {
+                    "name": "assessors",
+                    "description": "Input Assessor",
+                    "type": "Assessor",
+                    "required": true,
+                    "provides-files-for-command-mount": "roi-in"
+                }
+            ],
+            "derived-inputs": [
+                {
+                    "name": "session",
+                    "type": "Session",
+                    "required": true,
+                    "provides-value-for-command-input": "session",
+                    "derived-from-xnat-object-property": "id",
+                    "user-settable": false,
+                    "load-children": false,
+                    "derived-from-wrapper-input": "assessors"
+                },
+                {
+                    "name": "project",
+                    "type": "Project",
+                    "required": true,
+                    "provides-value-for-command-input": "project",
+                    "derived-from-xnat-object-property": "id",
+                    "user-settable": false,
+                    "load-children": true,
+                    "derived-from-wrapper-input": "session"
+                }
+            ]
+        }
+    ]
+}

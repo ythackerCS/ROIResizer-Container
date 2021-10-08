@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cat:Catalog ID="4" xmlns:arc="http://nrg.wustl.edu/arc" xmlns:cat="http://nrg.wustl.edu/catalog" xmlns:icr="http://icr.ac.uk/icr" xmlns:pipe="http://nrg.wustl.edu/pipe" xmlns:prov="http://www.nbirn.net/prov" xmlns:scr="http://nrg.wustl.edu/scr" xmlns:val="http://nrg.wustl.edu/val" xmlns:wrk="http://nrg.wustl.edu/workflow" xmlns:xdat="http://nrg.wustl.edu/security" xmlns:xnat="http://nrg.wustl.edu/xnat" xmlns:xnat_a="http://nrg.wustl.edu/xnat_assessments" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<cat:metaFields>
+	<cat:metaField name="PROJECT">test</cat:metaField>
+	<cat:metaField name="AUDIT">16:Wed Feb 10 15:07:14 UTC 2021=Added:1</cat:metaField>
+</cat:metaFields>
+<cat:entries>
+	<cat:entry ID="out.txt" URI="out.txt" cachePath="out.txt" createdEventId="16" createdTime="2021-02-10T15:07:14.626" digest="6f5902ac237024bdd0c176cb93063dc4" name="out.txt">
+		<cat:metaFields>
+			<cat:metaField name="SIZE">12</cat:metaField>
+		</cat:metaFields>
+	</cat:entry>
+</cat:entries>
+</cat:Catalog>
