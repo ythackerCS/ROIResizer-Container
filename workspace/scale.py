@@ -270,7 +270,7 @@ for rt in rtfolders:
             sesh.keep_alive = False
             now = datetime.now()
 
-            roi_label = now.strftime("AIM_%Y%m%d_%H%M%S%.%f")[:-3]
+            roi_label = "S"+str(int(ScaleDownFactor*100))+"P_"+now.strftime("AIM_%Y%m%d_%H%M%S%.%f")[:-3]
 
             url = "{0}/xapi/roi/projects/{1}/sessions/{2}/collections/{3}?type=RTSTRUCT".format(xnat_host, project, session, roi_label)
 
