@@ -7,7 +7,14 @@ from shapely.geometry import Polygon
 import numpy as np
 import argparse
 import requests 
+
+
+
 from requests.structures import CaseInsensitiveDict
+from datetime import date 
+from datetime import datetime
+
+
 
 #this python script can take a RTStruct of dcm type and scale every segmentation within it or scale only the segmentation with a matching filter name; flag: -f 
     #the scaling of the segmentation can also be done in two ways:; flags: -a (for all) and -p (percentage of scaling) and -n (new name of scaled segmentation)
@@ -261,6 +268,9 @@ for rt in rtfolders:
 
         with requests.session() as sesh:
             sesh.keep_alive = False
+            now = datetime.now()
+
+            roi_label = now.strftime("AIM_%Y%m%d_%H%M%S%.%f")[:-3]
 
             url = "{0}/xapi/roi/projects/{1}/sessions/{2}/collections/{3}?type=RTSTRUCT".format(xnat_host, project, session, roi_label)
 

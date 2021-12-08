@@ -22,7 +22,8 @@
     ],
     "environment-variables": {
             "PROJECT": "#PROJECT#",
-            "SESSION": "#SESSION#"
+            "SESSION": "#SESSION#",
+            "SUBJECT": "#SUBJECT#"
     },
     "inputs": [
         {
@@ -106,7 +107,15 @@
             "type": "string",
             "required": true,
             "replacement-key": "#SESSION#"
+        },
+        {
+            "name": "subject",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "replacement-key": "#SUBJECT#"
         }
+
     ],
     "xnat": [
         {
@@ -133,6 +142,16 @@
                     "user-settable": false,
                     "load-children": false,
                     "derived-from-wrapper-input": "assessors"
+                },
+                {
+                    "name": "subject",
+                    "type": "subject",
+                    "required": true,
+                    "provides-value-for-command-input": "subject",
+                    "derived-from-xnat-object-property": "subject-id",
+                    "user-settable": false,
+                    "load-children": false,
+                    "derived-from-wrapper-input": "session"
                 },
                 {
                     "name": "project",
