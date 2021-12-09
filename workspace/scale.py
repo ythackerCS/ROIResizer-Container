@@ -245,7 +245,7 @@ for rt in rtfolders:
         copyStruct = rois.copy()
 
         struct = scaleRTS(ROIFilterName, ScaleDownFactor, NewName, resizeAllContours, copyStruct)
-        segmentationCollectionName = NewName+"scaled"+str(int(ScaleDownFactor*100))+"P"
+        segmentationCollectionName = struct.StructureSetLabel+"scaled"+str(int(ScaleDownFactor*100))+"P"
         struct.StructureSetLabel=segmentationCollectionName
 
         #saving dcmfile
@@ -270,7 +270,8 @@ for rt in rtfolders:
             sesh.keep_alive = False
             now = datetime.now()
 
-            roi_label = "S"+str(int(ScaleDownFactor*100))+"P_"+now.strftime("AIM_%Y%m%d_%H%M%S%.%f")[:-3]
+            now = now.strftime("AIM_%Y%m%d_%H%M%S_%f")[:-3]
+            roi_label = "S"+str(int(ScaleDownFactor*100))+"P_"+now
 
             url = "{0}/xapi/roi/projects/{1}/sessions/{2}/collections/{3}?type=RTSTRUCT".format(xnat_host, project, session, roi_label)
 
